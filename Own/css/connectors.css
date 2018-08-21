@@ -1,0 +1,19 @@
+.block .connector {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: grey;
+}
+.block .connector.top {
+    left: 50%;
+    top: 0;
+    margin-left: -5px;
+    margin-top: -5px;
+}
+.block .connector.bottom {
+    left: 50%;
+    bottom: 0;
+    margin-left: -5px;
+    margin-bottom: -5px;
+}

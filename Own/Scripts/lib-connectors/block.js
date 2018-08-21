@@ -1,7 +1,10 @@
 function Block(el, plot) {
+    var self = this;
     this.connectors = [];
     this.plot = plot;
+    this.layout = null;
     this.$ = $(el);
+    
     
     this.connect = function (block, config) {
         config = config || {};
@@ -47,4 +50,19 @@ function Block(el, plot) {
         var bottom = this.connectors.filter(function(c) { return c.position === 'bottom'; });
         this.setPositions(bottom, width);
     }
+    
+    this.$.draggable({
+        drag: function() {
+            if (self.layout) {
+                self.layout.calcConnectorPositions();
+            }
+            self.plot.redraw();
+        },
+        stop: function() {
+            if (self.layout) {
+                self.layout.calcConnectorPositions();
+            }
+            self.plot.redraw();
+        }
+    });
 }

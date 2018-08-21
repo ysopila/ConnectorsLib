@@ -77,20 +77,6 @@
 
         <script>
             $(function() {
-                $('.block').draggable({
-                    drag: function() {
-                        b1.calcConnectorPositions();
-                        b2.calcConnectorPositions();
-                        b3.calcConnectorPositions();
-                        plot.redraw();
-                    },
-                    stop: function() {
-                        b1.calcConnectorPositions();
-                        b2.calcConnectorPositions();
-                        b3.calcConnectorPositions();
-                        plot.redraw();
-                    }
-                });
                 var $canvas = $('canvas');
                 context = $canvas[0].getContext("2d");
 

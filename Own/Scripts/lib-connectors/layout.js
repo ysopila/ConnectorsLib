@@ -9,6 +9,7 @@ function Layout(el, config) {
 
     this.addBlock = function (b) {
         this.blocks.push(b);
+        b.layout = this;
     }
 
     this.performLayout = function() {
@@ -23,6 +24,12 @@ function Layout(el, config) {
         this._calculateGridSize();
         this._redrawLayout();
         this._setBlockStyles();
+    }
+
+    this.calcConnectorPositions = function() {
+        for (var i = 0; i < this.blocks.length; i++) {
+            this.blocks[i].calcConnectorPositions();
+        }
     }
 
     this._createCanvas = function() {

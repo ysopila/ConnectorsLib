@@ -32,6 +32,15 @@ function Layout(el, config) {
         }
     }
 
+    this.doesAnyIntersects = function(line) {
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].intersects(line)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     this.shouldRevertPosition = function($el) {
         for (var i = 0; i < this.blocks.length; i++) {
             if (this.blocks[i].intersectWith($el)) {

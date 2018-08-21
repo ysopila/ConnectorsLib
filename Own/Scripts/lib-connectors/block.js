@@ -5,7 +5,12 @@ function Block(el, plot) {
     this.layout = null;
     this.$ = $(el);
     
-    
+    this.intersects = function(line) {
+        var width = this.$.width();
+        var height = this.$.height();
+        var position = this.$.position();
+        return doesLineIntersectsRect(line, { x: position.left, y: position.top, width: width, height: height });
+    }
     this.connect = function (block, config) {
         config = config || {};
         var source = new Connector({ type: 'source', color: config.color });
@@ -32,8 +37,8 @@ function Block(el, plot) {
             return;
         }
 
-        var array = connectors.map(function(c) { return { c: c, left: c.getAvgConnectionDirection().left } });
-        array.sort(function(a, b) { return a.left - b.left; });
+        var array = connectors.map(function(c) { return { c: c, direction: c.getAvgConnectionDirection() } });
+        array.sort(function(a, b) { return a.direction.left - b.direction.left || b.direction.top - a.direction.top; });
         connectors = array.map(function(c) { return c.c; });
 
         var zone = size / connectors.length;

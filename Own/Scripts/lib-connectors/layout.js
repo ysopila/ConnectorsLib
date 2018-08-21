@@ -32,6 +32,15 @@ function Layout(el, config) {
         }
     }
 
+    this.shouldRevertPosition = function($el) {
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].intersectWith($el)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     this._createCanvas = function() {
         var canvas = $('<canvas/>', { class: 'layout' });
         this.$.prepend(canvas);

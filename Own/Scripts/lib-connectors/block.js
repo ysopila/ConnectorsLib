@@ -50,8 +50,21 @@ function Block(el, plot) {
         var bottom = this.connectors.filter(function(c) { return c.position === 'bottom'; });
         this.setPositions(bottom, width);
     }
+
+    this.intersectWith = function($el) {
+        if ($el == this.$) {
+            return false;
+        }
+
+        var currentPosition = this.$.position();
+        var elementPosition = $el.position();
+
+        return Math.max(elementPosition.left, currentPosition.left) < Math.min(elementPosition.left +  $el.outerWidth() , currentPosition.left + this.$.outerWidth()) &&
+                Math.max(elementPosition.top, currentPosition.top) < Math.min(elementPosition.top  + $el.outerHeight(), currentPosition.top + this.$.outerHeight());
+    }
     
     this.$.draggable({
+        revertDuration: false,
         drag: function() {
             if (self.layout) {
                 self.layout.calcConnectorPositions();
@@ -63,6 +76,12 @@ function Block(el, plot) {
                 self.layout.calcConnectorPositions();
             }
             self.plot.redraw();
+        },
+        revert: function() {
+            if (self.layout) {
+                return self.layout.shouldRevertPosition(self.$);
+            }
+            return false;
         }
     });
 }

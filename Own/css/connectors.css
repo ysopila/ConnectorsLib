@@ -19,9 +19,21 @@
     margin-left: -5px;
     margin-top: -5px;
 }
+.block.ui-draggable-dragging {
+    z-index: 5;
+}
 .block .connector.bottom {
     left: 50%;
     bottom: 0;
     margin-left: -5px;
     margin-bottom: -5px;
+}
+
+.highlight {
+    background: green;
+    opacity: 0.1;
+    position: absolute;
+}
+.highlight.invalid {
+    background: red;
 }

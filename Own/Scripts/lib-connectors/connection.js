@@ -37,19 +37,20 @@ function Connection(config) {
 
         context.beginPath();
         context.strokeStyle = this.source.color;
-        context.moveTo(sourcePos.left + sourceD, sourcePos.top + sourceRadius);
         if (destPos.top > sourcePos.top + colspan) {
+            context.moveTo(sourcePos.left + sourceD, sourcePos.top);
             var left = Math.min(Math.abs(destPos.left + destD - sourcePos.left - sourceD) / 2, colspan / 2);
 
             if (destPos.left + destD > sourcePos.left + sourceD) {
-                context.quadraticCurveTo(sourcePos.left + sourceD, sourcePos.top + sourceRadius + rowspan / 2, sourcePos.left + sourceD + left, sourcePos.top + sourceRadius + rowspan / 2);
-                context.lineTo(destPos.left + destD - left, sourcePos.top + sourceRadius + rowspan / 2);
+                context.quadraticCurveTo(sourcePos.left + sourceD, sourcePos.top + rowspan / 2, sourcePos.left + sourceD + left, sourcePos.top + rowspan / 2);
+                context.lineTo(destPos.left + destD - left, sourcePos.top + rowspan / 2);
             } else {
-                context.quadraticCurveTo(sourcePos.left + sourceD, sourcePos.top + sourceRadius + rowspan / 2, sourcePos.left + sourceD - left, sourcePos.top + sourceRadius + rowspan / 2);
-                context.lineTo(destPos.left + destD + left, sourcePos.top + sourceRadius + rowspan / 2);
+                context.quadraticCurveTo(sourcePos.left + sourceD, sourcePos.top + rowspan / 2, sourcePos.left + sourceD - left, sourcePos.top + rowspan / 2);
+                context.lineTo(destPos.left + destD + left, sourcePos.top + rowspan / 2);
             }
-            context.quadraticCurveTo(destPos.left + destD, sourcePos.top + sourceRadius + rowspan / 2, destPos.left+ destD, sourcePos.top + sourceRadius + rowspan / 2 * 2);
+            context.quadraticCurveTo(destPos.left + destD, sourcePos.top + rowspan / 2, destPos.left+ destD, sourcePos.top + rowspan / 2 * 2);
         } else {
+            context.moveTo(sourcePos.left + sourceD, sourcePos.top + sourceRadius);
             var left = colspan / 2;
             if (destPos.left > sourcePos.left) {
                 context.quadraticCurveTo(sourcePos.left + sourceD, sourcePos.top + sourceRadius + rowspan / 2, sourcePos.left + sourceD + left, sourcePos.top + sourceRadius + rowspan / 2);

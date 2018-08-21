@@ -32,8 +32,8 @@ function Block(el, plot) {
             return;
         }
 
-        var array = connectors.map(function(c) { return { c: c, left: c.getAvgConnectionDirection().left } });
-        array.sort(function(a, b) { return a.left - b.left; });
+        var array = connectors.map(function(c) { return { c: c, direction: c.getAvgConnectionDirection() } });
+        array.sort(function(a, b) { return a.direction.left - b.direction.left || b.direction.top - a.direction.top; });
         connectors = array.map(function(c) { return c.c; });
 
         var zone = size / connectors.length;

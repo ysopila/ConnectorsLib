@@ -41,7 +41,7 @@ function Connector(config) {
         } else {
             throw 'Not supported';
         }
-        this.$.css('background-color', this.color);
+        this.$.css('border-color', this.color);
         this.block.$.append(this.$);
     }
     this.remove = function () {

@@ -3,7 +3,15 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: grey;
+    border-color: grey;
+    background-color: transparent;
+    border-width: 2px;
+    border-style: solid;
+    box-sizing: border-box;
+    background: white;
+}
+.block .connector.destination {
+    background: transparent;
 }
 .block .connector.top {
     left: 50%;

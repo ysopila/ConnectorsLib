@@ -10,6 +10,7 @@
                 margin: auto;
                 position: relative;
                 border: 1px solid gray;
+                overflow: auto;
             }
             .block {
                 width: 150px;
@@ -17,6 +18,7 @@
                 border: 1px solid black;
                 position: absolute;
                 background: #FEFEFE;
+                box-sizing: border-box;
             }
             #block1 {
                 top: 50px;
@@ -52,6 +54,7 @@
         <script src="Scripts/lib-connectors/block.js"></script>
         <script src="Scripts/lib-connectors/connector.js"></script>
         <script src="Scripts/lib-connectors/plot.js"></script>
+        <script src="Scripts/lib-connectors/layout.js"></script>
     </head>
     <body>
         <div class="container">
@@ -77,16 +80,24 @@
                         plot.redraw();
                     }
                 });
-                
                 var $canvas = $('canvas');
-                $canvas.attr('width', $canvas.width());
-                $canvas.attr('height', $canvas.height());
                 context = $canvas[0].getContext("2d");
 
                 var plot = new Plot(context);
+                
                 var b1 = new Block('#block1', plot);
                 var b2 = new Block('#block2', plot);
                 var b3 = new Block('#block3', plot);
+
+                var layout = new Layout('.container');
+                layout.addBlock(b1);
+                layout.addBlock(b2);
+                layout.addBlock(b3);
+                layout.performLayout();
+
+                $canvas.attr('width', $canvas.width());
+                $canvas.attr('height', $canvas.height());
+
                 b1.connect(b2);
                 b1.connect(b3, { color: 'red' });
                 b2.connect(b3, { color: 'green' });

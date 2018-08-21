@@ -127,7 +127,8 @@ function Connection(config) {
             context.lineTo(destPos.left + destD - 5, destPos.top - 6 - 2);
             context.moveTo(destPos.left + destD, destPos.top - 2);
             context.lineTo(destPos.left + destD + 5, destPos.top - 6 - 2);
-
+            
+            context.closePath();
             context.stroke();
         }
     }

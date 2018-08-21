@@ -3,10 +3,10 @@ function Layout(el, config) {
 
     this.setConfig = function(config) {
         config = config || {};
-        this.colspan = config.colspan || 30;
-        this.rowspan = config.rowspan || 30;
-        this.blockWidth = config.blockWidth || 150;
-        this.blockHeight = config.blockHeight || 150;
+        this.colspan = config.colspan || 50;
+        this.rowspan = config.rowspan || 50;
+        this.blockWidth = config.blockWidth || 200;
+        this.blockHeight = config.blockHeight || 200;
     }
 
     this.addBlock = function (b) {

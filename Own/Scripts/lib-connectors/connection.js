@@ -3,6 +3,7 @@ function Connection(config) {
     this.destination = config.destination;
     this.source.connections.push(this.destination);
     this.destination.connections.push(this.source);
+    this.experimental = false;
 
     this.remove = function () {
         var index = this.source.connections.indexOf(this.destination);
@@ -36,9 +37,10 @@ function Connection(config) {
         if (this.source.position !== 'bottom' || this.destination.position !== 'top') {
             throw 'Currently only bottom position is supported for sources and top for destinations';
         }
+        context.lineWidth = 2;
 
-        var rowspan = config.rowspan || 30;
-        var colspan = config.colspan || 30;
+        var rowspan = config.rowspan || 50;
+        var colspan = config.colspan || 50;
         var sourceRadius = this.source.$.width() / 2;
         var destRadius = this.destination.$.width() / 2;
 
@@ -56,7 +58,7 @@ function Connection(config) {
 
         var start = { x: sourcePos.left + sourceD, y: sourcePos.top + 2 };
         var end = { x: destPos.left + destD, y: destPos.top - 2 };
-        if (destPos.top > sourcePos.top && !this.source.block.layout.doesAnyIntersects([start, end])) {
+        if (this.experimental && destPos.top > sourcePos.top && !this.source.block.layout.doesAnyIntersects([start, end])) {
             context.beginPath();
             context.strokeStyle = this.source.color;
             context.fillStyle = this.source.color;

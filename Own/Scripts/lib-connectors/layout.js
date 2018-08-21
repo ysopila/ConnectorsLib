@@ -1,8 +1,8 @@
 function Layout(el, config) {
     this.setConfig = function(config) {
         config = config || {};
-        this.colspan = config.colspan || 20;
-        this.rowspan = config.rowspan || 20;
+        this.colspan = config.colspan || 30;
+        this.rowspan = config.rowspan || 30;
         this.blockWidth = config.blockWidth || 150;
         this.blockHeight = config.blockHeight || 150;
     }
@@ -70,7 +70,7 @@ function Layout(el, config) {
 
         for(var i = 0; i < this.cols; i++) {
             this.context.beginPath();
-            this.context.strokeStyle = 'gray';
+            this.context.strokeStyle = '#d3d3d3';
 
             this.context.moveTo(this.colspan + i * (this.blockWidth + this.colspan), 0);
             this.context.lineTo(this.colspan + i * (this.blockWidth + this.colspan), height);
@@ -82,7 +82,7 @@ function Layout(el, config) {
 
         for(var i = 0; i < this.rows; i++) {
             this.context.beginPath();
-            this.context.strokeStyle = 'gray';
+            this.context.strokeStyle = '#d3d3d3';
 
             this.context.moveTo(0, this.rowspan + i * (this.blockHeight + this.rowspan));
             this.context.lineTo(width, this.rowspan + i * (this.blockHeight + this.rowspan));

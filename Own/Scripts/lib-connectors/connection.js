@@ -18,8 +18,8 @@ function Connection(config) {
             throw 'Currently only bottom position is supported for sources and top for destinations';
         }
 
-        var rowspan = config.rowspan || 20;
-        var colspan = config.colspan || 20;
+        var rowspan = config.rowspan || 30;
+        var colspan = config.colspan || 30;
         var sourceRadius = this.source.$.width() / 2;
         var destRadius = this.destination.$.width() / 2;
 

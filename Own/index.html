@@ -12,6 +12,9 @@
                 border: 1px solid gray;
                 overflow: auto;
             }
+            .content {
+                position: relative;
+            }
             .block {
                 width: 150px;
                 height: 150px;
@@ -58,10 +61,12 @@
     </head>
     <body>
         <div class="container">
-            <canvas id="canvas"></canvas>
-            <div class="block" id="block1"></div>
-            <div class="block" id="block2"></div>
-            <div class="block" id="block3"></div>
+            <div class="content">
+                <canvas id="canvas"></canvas>
+                <div class="block" id="block1"></div>
+                <div class="block" id="block2"></div>
+                <div class="block" id="block3"></div>
+            </div>
         </div>
 
         <script>
@@ -89,7 +94,7 @@
                 var b2 = new Block('#block2', plot);
                 var b3 = new Block('#block3', plot);
 
-                var layout = new Layout('.container');
+                var layout = new Layout('.content');
                 layout.addBlock(b1);
                 layout.addBlock(b2);
                 layout.addBlock(b3);

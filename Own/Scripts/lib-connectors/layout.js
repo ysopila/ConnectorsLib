@@ -42,8 +42,8 @@ function Layout(el, config) {
         }
     }
     this._calculateGridSize = function() {
-        var width = this.$.width();
-        var height = this.$.height();
+        var width = this.$.parent().width();
+        var height = this.$.parent().height();
         var cols = Math.ceil(width / (this.blockWidth + this.colspan));
         var rows = Math.ceil(height / (this.blockHeight + this.rowspan));
         for (var i = 0; i < this.blocks.length; i++) {

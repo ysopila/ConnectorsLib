@@ -5,7 +5,12 @@ function Block(el, plot) {
     this.layout = null;
     this.$ = $(el);
     
-    
+    this.intersects = function(line) {
+        var width = this.$.width();
+        var height = this.$.height();
+        var position = this.$.position();
+        return doesLineIntersectsRect(line, { x: position.left, y: position.top, width: width, height: height });
+    }
     this.connect = function (block, config) {
         config = config || {};
         var source = new Connector({ type: 'source', color: config.color });

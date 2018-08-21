@@ -35,7 +35,6 @@ function Layout(el, config) {
     this.doesAnyIntersects = function(line) {
         for (var i = 0; i < this.blocks.length; i++) {
             if (this.blocks[i].intersects(line)) {
-                console.log(this.blocks[i], line);
                 return true;
             }
         }

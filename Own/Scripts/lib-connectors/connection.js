@@ -15,8 +15,12 @@ function Connection(config) {
     this.drawArrow = function(context, x, y, radians) {
         context.save();
         context.beginPath();
-        context.translate(x,y);
-        context.rotate(radians);
+        context.translate(x, y);
+        if (radians) {
+            context.rotate(radians);
+        } else {
+            context.rotate(Math.PI);
+        }
         context.moveTo(0, 0);
         context.lineTo(4, 6);
         context.moveTo(0, 0);
@@ -127,7 +131,7 @@ function Connection(config) {
             context.lineTo(destPos.left + destD - 5, destPos.top - 6 - 2);
             context.moveTo(destPos.left + destD, destPos.top - 2);
             context.lineTo(destPos.left + destD + 5, destPos.top - 6 - 2);
-            
+
             context.closePath();
             context.stroke();
         }

@@ -75,10 +75,10 @@ function Connection(config) {
             context.strokeStyle = this.source.color;
             var p = new RoundedPath();
             if (destPos.top > sourcePos.top + colspan) {
-                p.addPoint(sourcePos.left + sourceD, sourcePos.top);
+                p.addPoint(sourcePos.left + sourceD, sourcePos.top + sourceRadius);
                 p.addPoint(sourcePos.left + sourceD, sourcePos.top + rowspan / 2);
 
-                if (destPos.top > sourcePos.top + colspan + blockHeight && this.source.block.layout.doesAnyIntersects([start, end])) {
+                if (destPos.top > sourcePos.top + colspan + blockHeight) {
                     if (destPos.left + destD > sourcePos.left + sourceD) {
                         p.addPoint(sourcePos.left + blockWidth / 2 + colspan / 2, sourcePos.top + rowspan / 2);
                         p.addPoint(sourcePos.left + blockWidth / 2 + colspan / 2, destPos.top - rowspan / 2);

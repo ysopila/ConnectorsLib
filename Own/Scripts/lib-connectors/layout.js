@@ -156,6 +156,7 @@ function Layout(el, config) {
 
         for(var i = 0; i < this.cols; i++) {
             this.context.beginPath();
+            this.context.lineWidth = 0.5;
             this.context.strokeStyle = '#d3d3d3';
 
             this.context.moveTo(this.colspan + i * (this.blockWidth + this.colspan), 0);
@@ -168,6 +169,7 @@ function Layout(el, config) {
 
         for(var i = 0; i < this.rows; i++) {
             this.context.beginPath();
+            this.context.lineWidth = 0.5;
             this.context.strokeStyle = '#d3d3d3';
 
             this.context.moveTo(0, this.rowspan + i * (this.blockHeight + this.rowspan));

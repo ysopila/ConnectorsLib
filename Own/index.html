@@ -67,6 +67,7 @@
                 <div class="block" id="block1"></div>
                 <div class="block" id="block2"></div>
                 <div class="block" id="block3"></div>
+                <div class="block" id="block4"></div>
             </div>
         </div>
 
@@ -77,15 +78,18 @@
                 var b1 = new Block('#block1', plot);
                 var b2 = new Block('#block2', plot);
                 var b3 = new Block('#block3', plot);
+                var b4 = new Block('#block4', plot);
 
                 var layout = new Layout('.content');
                 layout.addBlock(b1);
                 layout.addBlock(b2);
                 layout.addBlock(b3);
+                layout.addBlock(b4);
 
-                b1.connect(b2);
-                b1.connect(b3, { color: 'red' });
-                b2.connect(b3, { color: 'green' });
+                b1.connect(b2, { color: '#D0021B' });
+                b1.connect(b3, { color: '#4FB8C5' });
+                b2.connect(b4, { color: '#304280' });
+                b3.connect(b4, { color: '#4FB8C5' });
 
                 layout.performLayout();
 

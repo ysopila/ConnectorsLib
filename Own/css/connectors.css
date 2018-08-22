@@ -1,3 +1,6 @@
+.block {
+    z-index: 2;
+}
 .block .connector {
     position: absolute;
     width: 14px;
@@ -30,10 +33,22 @@
 }
 
 .highlight {
+    z-index: 3;
     background: green;
     opacity: 0.1;
     position: absolute;
 }
 .highlight.invalid {
     background: red;
+}
+.layout {
+    z-index: 0;
+}
+.plot {
+    z-index: 1;
+    position: absolute;
+    top: 1;
+    left: 1;
+    width: 100%;
+    height: 100%;
 }

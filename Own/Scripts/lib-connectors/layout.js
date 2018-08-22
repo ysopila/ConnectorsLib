@@ -149,8 +149,10 @@ function Layout(el, config) {
     
     this._redrawLayout = function() {
         this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-        var width = this.context.canvas.width = this.cols * this.blockWidth + (this.cols + 1) * this.colspan;
-        var height = this.context.canvas.height = this.rows * this.blockHeight + (this.rows + 1) * this.rowspan;
+        var width = this.context.canvas.style.width = this.context.canvas.width = this.cols * this.blockWidth + (this.cols + 1) * this.colspan;
+        var height = this.context.canvas.style.height = this.context.canvas.height = this.rows * this.blockHeight + (this.rows + 1) * this.rowspan;
+        this.$.width(width);
+        this.$.height(height);
 
         for(var i = 0; i < this.cols; i++) {
             this.context.beginPath();

@@ -42,14 +42,6 @@
                 top: 100px;
                 left: 500px;
             }
-
-            #canvas {
-                position: absolute;
-                top: 1;
-                left: 1;
-                width: 100%;
-                height: 100%;
-            }
         </style>
         <link rel="stylesheet" href="css/connectors.css"/>
         <script
@@ -70,7 +62,6 @@
     <body>
         <div class="container">
             <div class="content">
-                <canvas id="canvas"></canvas>
                 <div class="block" id="block1"></div>
                 <div class="block" id="block2"></div>
                 <div class="block" id="block3"></div>
@@ -79,10 +70,7 @@
 
         <script>
             $(function() {
-                var $canvas = $('canvas');
-                context = $canvas[0].getContext("2d");
-
-                var plot = new Plot(context);
+                var plot = new Plot('.content');
                 
                 var b1 = new Block('#block1', plot);
                 var b2 = new Block('#block2', plot);
@@ -93,9 +81,6 @@
                 layout.addBlock(b2);
                 layout.addBlock(b3);
                 layout.performLayout();
-
-                $canvas.attr('width', $canvas.width());
-                $canvas.attr('height', $canvas.height());
 
                 b1.connect(b2);
                 b1.connect(b3, { color: 'red' });

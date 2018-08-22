@@ -80,11 +80,14 @@
                 layout.addBlock(b1);
                 layout.addBlock(b2);
                 layout.addBlock(b3);
-                layout.performLayout();
 
                 b1.connect(b2);
                 b1.connect(b3, { color: 'red' });
                 b2.connect(b3, { color: 'green' });
+
+                layout.performLayout();
+
+                
                 plot.redraw();
             });
         </script>

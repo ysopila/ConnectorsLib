@@ -15,17 +15,11 @@ function Layout(el, config) {
     }
 
     this.performLayout = function() {
-        if (!this.blocks || !this.blocks.length) {
-            return;
-        }
-        for (var i = 0; i < this.blocks.length; i++) {
-            var block = this.blocks[i];
-            block.gridColumn = 0;
-            block.gridRow = i;
-        }
         this._calculateGridSize();
+        this._alignBlocks();
         this._redrawLayout();
         this._setBlockStyles();
+        this.calcConnectorPositions();
     }
 
     this.calcConnectorPositions = function() {
@@ -129,13 +123,19 @@ function Layout(el, config) {
         var height = this.$.parent().height();
         var cols = Math.ceil(width / (this.blockWidth + this.colspan));
         var rows = Math.ceil(height / (this.blockHeight + this.rowspan));
+        
         for (var i = 0; i < this.blocks.length; i++) {
             var block = this.blocks[i];
             var bCols = Math.abs(block.gridColumn) * 2 + 1;
             var bRows = Math.abs(block.gridRow) + 1;
-            cols = Math.max(cols, bCols);
-            rows = Math.max(rows, bRows);
+            if (bCols) {
+                cols = Math.max(cols, bCols);
+            }
+            if (bRows) {
+                rows = Math.max(rows, bRows);
+            }
         }
+
         this.cols = cols;
         this.rows = rows;
 
@@ -177,6 +177,72 @@ function Layout(el, config) {
             this.context.lineTo(width, (i + 1) * (this.blockHeight + this.rowspan));
             this.context.stroke();
         }
+    }
+
+    this._alignBlocks = function() {
+        if (!this.blocks.length) {
+            return;
+        }
+        
+        for (var i = 0; i < this.blocks.length; i++) {
+            var block = this.blocks[i];
+            block.gridColumn = null;
+            block.gridRow = null;
+        }
+
+        var aligned = [];
+        var nextBlock = this.blocks[0];
+        var currentRow = 0;
+        var currentColumn = 0;
+        while (nextBlock) {
+            nextBlock.gridColumn = currentColumn;
+            nextBlock.gridRow = currentRow;
+            aligned.push(nextBlock);
+            nextBlock = null;
+
+            currentRow++;
+
+            currentRow = this._alignRow(currentRow, aligned);
+
+            for (var i = 0; i < this.blocks.length; i++) {
+                var block = this.blocks[i];
+                if (aligned.indexOf(block) === -1) {
+                    nextBlock = block;
+                }
+            }
+        }
+    }
+
+    this._alignRow = function(currentRow, aligned) {
+        var parents = [];
+        for (var i = 0; i < this.blocks.length; i++) {
+            var block = this.blocks[i];
+            if (aligned.indexOf(block) > -1 || block.gridRow === currentRow - -1) {
+                parents.push(block);
+            }
+        }
+        var children = [];
+        for (var i = 0; i < parents.length; i++) {
+            var parent = parents[i];
+            var destinations = parent.getDestinationBlocks();
+            for (var j = 0; j < destinations.length; j++) {
+                var child = destinations[j];
+                if (aligned.indexOf(child) === -1 && children.indexOf(child) === -1) {
+                    children.push(child);
+                }
+            }
+        }
+        if (!children.length) {
+            return currentRow;
+        }
+        for (var i = 0; i < children.length; i++) {
+            var child = children[i];
+            child.gridColumn = - Math.floor(children.length / 2) + i;
+            child.gridRow = currentRow;
+            aligned.push(child);
+        }
+        currentRow++;
+        return this._alignRow(currentRow, aligned);
     }
 
     this.$ = $(el);

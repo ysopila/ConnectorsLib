@@ -56,6 +56,28 @@ function Block(el, plot) {
         this.setPositions(bottom, width);
     }
 
+    this.getSourceConnectors = function () {
+        var sources = [];
+        for (var i = 0; i < this.connectors.length; i++) {
+            var c = this.connectors[i];
+            if (c.type === 'source') {
+                sources.push(c);
+            }
+        }
+        return sources;
+    }
+    this.getDestinationBlocks = function() {
+        var sources = this.getSourceConnectors();
+        var result = [];
+        for (var i = 0; i < sources.length; i++) {
+            var c = sources[i];
+            for (var j = 0; j < c.connections.length; j++) {
+                result.push(c.connections[j].block);
+            }
+        }
+        return result;
+    }
+
     this.$.draggable({
         drag: function() {
             if (self.layout) {

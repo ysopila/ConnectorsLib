@@ -15,8 +15,8 @@ function Layout(el, config) {
     }
 
     this.performLayout = function() {
-        this._calculateGridSize();
         this._alignBlocks();
+        this._calculateGridSize();
         this._redrawLayout();
         this._setBlockStyles();
         this.calcConnectorPositions();

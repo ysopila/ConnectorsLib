@@ -89,8 +89,8 @@ function Block(el, plot) {
         stop: function() {
             if (self.layout) {
                 self.layout.highlightCell();
-                self.layout.calcConnectorPositions();
                 self.layout.positionBlock(self);
+                self.layout.calcConnectorPositions();
             }
             self.plot.redraw();
         }
